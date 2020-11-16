@@ -21,6 +21,8 @@ parser.add_argument("--channels", type=int, default=3,
 parser.add_argument("--quality", type=str, default="baseline",
                     choices = ["baseline", "esrgan"],
                     help="type of image to generate")
+parser.add_argument("--face_detection", action="store_true",
+                    help="use face detection")
 opt = parser.parse_args()
 print(opt)
 
@@ -66,6 +68,20 @@ class Generator(nn.Module):
         return img
 
 
+def face_detector(img_path):
+    # Load the cascade
+    cascPath = "weights/haarcascade_frontalface_default.xml"
+    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + cascPath)
+    # Read image
+    img = cv2.imread(img_path)
+    # Convert into grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # Detect faces
+    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+
+    return len(faces)
+
+
 generator = Generator()
 
 if cuda:
@@ -88,6 +104,15 @@ for class_number in range(7):
             0, 1, (opt.batch_size, opt.latent_dim))))
         fake_imgs = generator(z)
 
-        save_image(fake_imgs.data[0], os.path.join(root_dir, "{img_list_len}_generated.png"), normalize=True)
-        img_list_len += 1
+        image_path = os.path.join(root_dir, "{img_list_len}_generated.png")
+        save_image(fake_imgs.data[0], image_path, normalize=True)
+
+        if opt.face_detector:
+            if face_detector(image_path) == 0:
+                os.remove(image_path)
+            else:
+                img_list_len += 1
+        else:
+            img_list_len += 1
+
         print(img_list_len)

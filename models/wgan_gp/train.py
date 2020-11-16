@@ -43,8 +43,9 @@ parser.add_argument("--dataset", type=str, default="baseline",
 opt = parser.parse_args()
 print(opt)
 
-dataroot = "data/train" if opt.dataset == "baseline" else "output/esrgan/train"
-output_dir = "output/wgan_gp" if opt.dataset == "baseline" else "output/esrgan_wgan_gp"
+dataroot = "data/baseline/train" if opt.dataset == "baseline" else "data/esrgan/train"
+output_dir = "data/wgan_gp" if opt.dataset == "baseline" else "data/esrgan_wgan_gp"
+weights_dir = "weights/wgan_gp" if opt.dataset == "baseline" else "weights/esrgan_wgan_gp"
 
 img_shape = (opt.channels, opt.img_size, opt.img_size)
 
@@ -139,11 +140,12 @@ def compute_gradient_penalty(D, real_samples, fake_samples):
 
 
 for class_number in range(7):
-    sample_images_dir = os.path.join(output_dir, "sample_images", class_number)
-    weights_dir = os.path.join(output_dir, "weights", class_number)
+    sample_images_dir = os.path.join(
+        weights_dir, class_number, "sample_images")
+    class_weights_dir = os.path.join(weights_dir, class_number)
 
     os.makedirs(sample_images_dir, exist_ok=True)
-    os.makedirs(weights_dir, exist_ok=True)
+    os.makedirs(class_weights_dir, exist_ok=True)
 
     # Configure data loader
     dataset = MyDataset(path=os.path.join(dataroot, "train", class_number),
@@ -237,9 +239,14 @@ for class_number in range(7):
 
                 if batches_done % opt.sample_interval == 0:
                     save_image(
-                        fake_imgs.data[:25], os.path.join(sample_images_dir, f"{class_number}/{batches_done}.png"), nrow=5, normalize=True)
-                    torch.save(generator.state_dict(
-                    ), os.path.join(weights_dir, f"{class_number}/{batches_done}.pth"))
+                        fake_imgs.data[:25],
+                        os.path.join(sample_images_dir,
+                                     f"{class_number}/{batches_done}.png"),
+                        nrow=5,
+                        normalize=True
+                    )
+                    torch.save(generator.state_dict(), os.path.join(
+                        class_weights_dir, f"{class_number}/{batches_done}.pth"))
                     print(f"Saved images and weight, {batches_done}")
 
                 batches_done += opt.n_critic

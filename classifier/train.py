@@ -26,7 +26,7 @@ parser.add_argument("--classifier", type=str, default="vgg19",
                     help="classifier type")
 opt = parser.parse_args()
 
-weight_dir = "classifier/weights/{}/{}/".format(opt.classifier, opt.dataset)
+weight_dir = "weights/{}/{}/".format(opt.classifier, opt.dataset)
 graph_dir = "classifier/graphs/{}/{}/".format(opt.classifier, opt.dataset)
 os.makedirs(weight_dir, exist_ok=True)
 os.makedirs(graph_dir, exist_ok=True)

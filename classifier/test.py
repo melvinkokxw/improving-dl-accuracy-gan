@@ -20,7 +20,7 @@ parser.add_argument("--classifier", type=str, default="vgg19",
                     help="classifier type")
 opt = parser.parse_args()
 
-weight_dir = "classifier/weights/{}/{}/".format(opt.classifier, opt.dataset)
+weight_dir = "weights/{}/{}/".format(opt.classifier, opt.dataset)
 weight_list = [os.path.join(weight_dir, path)
                for path in os.listdir(weight_dir)]
 

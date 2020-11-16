@@ -1,6 +1,7 @@
 import argparse
 import os
 
+import cv2
 import numpy as np
 import torch
 import torch.nn as nn
@@ -19,7 +20,7 @@ parser.add_argument("--img_size", type=int, default=255,
 parser.add_argument("--channels", type=int, default=3,
                     help="number of image channels")
 parser.add_argument("--quality", type=str, default="baseline",
-                    choices = ["baseline", "esrgan"],
+                    choices=["baseline", "esrgan"],
                     help="type of image to generate")
 parser.add_argument("--face_detection", action="store_true",
                     help="use face detection")
@@ -41,6 +42,7 @@ output_dir_dict = {
 }
 
 weight_file_dir = weight_file_dict[opt.quality]
+
 
 class Generator(nn.Module):
     def __init__(self):
@@ -91,13 +93,15 @@ if cuda:
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 
 for class_number in range(7):
-    state_dict = torch.load(os.path.join(weight_file_dir, str(class_number), "weight.pth"))
+    state_dict = torch.load(os.path.join(
+        weight_file_dir, str(class_number), "weight.pth"))
     generator.load_state_dict(state_dict)
 
     root_dir = os.path.join(output_dir_dict[opt.quality], str(class_number))
     os.makedirs(root_dir, exist_ok=True)
-    img_list = os.listdir(root_dir) + os.listdir(os.path.join("data/baseline/train", str(class_number)))
-    img_list_len = len(img_list) # Total number of generated + original images
+    img_list = os.listdir(
+        root_dir) + os.listdir(os.path.join("data/baseline/train", str(class_number)))
+    img_list_len = len(img_list)  # Total number of generated + original images
 
     while img_list_len < 10000:
         z = Variable(Tensor(np.random.normal(

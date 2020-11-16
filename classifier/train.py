@@ -34,9 +34,8 @@ train_img_list = list()
 train_label_list = list()
 for train_dir in train_dirs:
     for class_number in range(7):
-        class_number = str(class_number)
-        new_images = glob.glob(os.path.join(train_dir, class_number, '*.png'))
-        train_img_list += new_images
+        new_images = glob.glob(os.path.join(train_dir, str(class_number), '*.png'))
+        train_img_list.extend(new_images)
         for _ in range(len(new_images)):
             train_label_list.append(class_number)
 
@@ -44,9 +43,8 @@ valid_dir = image_directory_dict[opt.dataset]["val"]
 valid_img_list = list()
 valid_label_list = list()
 for class_number in range(7):
-    class_number = str(class_number)
-    new_images = glob.glob(os.path.join(valid_dir, class_number, '*.png'))
-    valid_img_list += new_images
+    new_images = glob.glob(os.path.join(valid_dir, str(class_number), '*.png'))
+    valid_img_list.extend(new_images)
     for _ in range(len(new_images)):
         valid_label_list.append(class_number)
 

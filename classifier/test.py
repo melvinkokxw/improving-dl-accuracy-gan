@@ -29,8 +29,7 @@ test_dir = image_directory_dict[opt.dataset]["test"]
 test_img_list = list()
 test_label_list = list()
 for class_number in range(7):
-    class_number = str(class_number)
-    new_images = glob.glob(os.path.join(test_dir, class_number, '*.png'))
+    new_images = glob.glob(os.path.join(test_dir, str(class_number), '*.png'))
     test_img_list += new_images
     for _ in len(new_images):
         test_label_list.append(class_number)

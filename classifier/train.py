@@ -28,6 +28,8 @@ opt = parser.parse_args()
 
 weight_dir = "classifier/weights/{}/{}/".format(opt.classifier, opt.dataset)
 graph_dir = "classifier/graphs/{}/{}/".format(opt.classifier, opt.dataset)
+os.makedirs(weight_dir, exist_ok=True)
+os.makedirs(graph_dir, exist_ok=True)
 
 train_dirs = image_directory_dict[opt.dataset]["train"]
 train_img_list = list()

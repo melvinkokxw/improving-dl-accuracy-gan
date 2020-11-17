@@ -20,9 +20,10 @@ image_directory_dict = {
         "test": "data/test"
     },
     "esrgan_wgan_gp": {
-        "train": ["output/esrgan_wgan_gp/images/train", "data/train"],
-        "val": "output/esrgan/images/val",
-        "test": "output/esrgan/images/test"
+    "esrgan_wgan_gp_fd": {
+        "train": ["data/esrgan_wgan_gp_fd/", "data/esrgan/train"],
+        "val": "data/esrgan/val",
+        "test": "data/esrgan/test"
     },
 }
 

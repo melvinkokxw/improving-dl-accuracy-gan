@@ -18,8 +18,8 @@ from common import (CNNModel, EmotionDataset, image_directory_dict,
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", type=str, default="baseline",
-                    choices=["baseline", "esrgan",
-                             "wgan_gp", "esrgan_wgan_gp"],
+                    choices=["baseline", "esrgan", "wgan_gp", 
+                             "esrgan_wgan_gp", "esrgan_wgan_gp_fd"],
                     help="augmented dataset to use")
 parser.add_argument("--classifier", type=str, default="vgg19",
                     choices=["vgg19", "resnet101", "efficientnet-b2b"],

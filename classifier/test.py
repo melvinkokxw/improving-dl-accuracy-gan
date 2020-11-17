@@ -31,7 +31,7 @@ test_label_list = list()
 for class_number in range(7):
     new_images = glob.glob(os.path.join(test_dir, str(class_number), '*.png'))
     test_img_list += new_images
-    for _ in len(new_images):
+    for _ in range(len(new_images)):
         test_label_list.append(class_number)
 
 

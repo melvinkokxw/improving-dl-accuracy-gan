@@ -11,10 +11,10 @@
   - [Folder structure](#folder-structure)
 - [Usage](#usage)
   - [Training GAN](#training-gan)
-  - [Generating from GAN weights](#generating-from-gan-weights)
+  - [Generating images from GAN weights](#generating-images-from-gan-weights)
   - [Training classifier](#training-classifier)
   - [Testing classifier](#testing-classifier)
-- [Credits](#credits)
+- [Acknowledgments](#acknowledgments)
 
 ## About the project
 
@@ -57,12 +57,12 @@ python3 -m pip install <package-name>
 The following files are required to run the program:
 
 * Image
-* Haar Cascade file. The Haar cascade file is required to run face detection can be obtained from [here](https://github.com/opencv/opencv/tree/master/data/haarcascades). Once download, place into the `weights` folder 
-* ESRGAN weights file. 
+* Haar Cascade file. The Haar cascade file is required to run face detection can be obtained from [here](https://github.com/opencv/opencv/tree/master/data/haarcascades). Once downloaded, place into the `weights` folder 
+* ESRGAN weights file. Get download link from [here](https://github.com/xinntao/ESRGAN#test-models).
 
 ### Folder structure
 
-As a guideline, here is where to put the weights/data
+As a guideline, here is where to put the weights & data
 
 ```
 .
@@ -116,7 +116,7 @@ python3 models/wgan_gp/train.py [-h] [--n_epochs N_EPOCHS] [--batch_size BATCH_S
                                 [--dataset {baseline,esrgan}]
 ```
 
-### Generating from GAN weights
+### Generating images from GAN weights
 
 1. Place weights into respective folders in `weights/`, as specified in the [folder structure](#folder-structure)
 
@@ -161,6 +161,7 @@ python3 classifier/test.py [-h]
 
 3. The highest accuracy and corresponding weight file will be printed to `stdout`
 
-## Credits
+## Acknowledgments
 
-WGAN-GP model adapted from 
+WGAN-GP model adapted from [PyTorch-GAN](https://github.com/eriklindernoren/PyTorch-GAN)
+ESRGAN model adapted from [ESRGAN](https://github.com/xinntao/ESRGAN)

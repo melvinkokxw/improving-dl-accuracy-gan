@@ -10,16 +10,20 @@ image_directory_dict = {
         "test": "data/test"
     },
     "esrgan": {
-        "train": ["output/esrgan/images/train"],
-        "val": "output/esrgan/images/val",
-        "test": "output/esrgan/images/test"
+        "train": ["data/esrgan/train"],
+        "val": "data/esrgan/val",
+        "test": "data/esrgan/test"
     },
     "wgan_gp": {
-        "train": ["output/wgan_gp/images/", "data/train"],
+        "train": ["data/wgan_gp/images/", "data/train"],
         "val": "data/val",
         "test": "data/test"
     },
     "esrgan_wgan_gp": {
+        "train": ["data/esrgan_wgan_gp/", "data/esrgan/train"],
+        "val": "data/esrgan/val",
+        "test": "data/esrgan/test"
+    },
     "esrgan_wgan_gp_fd": {
         "train": ["data/esrgan_wgan_gp_fd/", "data/esrgan/train"],
         "val": "data/esrgan/val",
@@ -33,7 +37,8 @@ plot_title_dict = {
     "efficientnet_b2b": "EfficientNet",
     "baseline": "Baseline",
     "esrganwgan": "ESRGAN + WGAN-GP",
-    "esrgan": "ESRGAN"
+    "esrgan": "ESRGAN",
+    "esrgan_wgan_gp_fd": "ESRGAN + WGAN-GP + Face Detection"
 }
 
 

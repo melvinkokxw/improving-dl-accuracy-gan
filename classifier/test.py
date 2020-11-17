@@ -65,8 +65,10 @@ max_acc = 0
 max_weight = ""
 
 for weight in weight_list:
-
-    state_dict = torch.load(weight)
+    if torch.cuda.is_available():
+        state_dict = torch.load(weight)
+    else:
+        state_dict = torch.load(weight, map_location=torch.device("cpu"))
     model.load_state_dict(state_dict)
 
     model.eval()

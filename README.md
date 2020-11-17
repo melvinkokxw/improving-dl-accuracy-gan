@@ -6,6 +6,8 @@
 
 - [About the project](#about-the-project)
 - [Getting started](#getting-started)
+  - [Installation](#installation)
+  - [Required files](#required-files)
 - [Usage](#usage)
 - [Credits](#credits)
 
@@ -17,7 +19,31 @@ By [Tan Kim Wai](https://github.com/ktan119), [Ng Woon Ting Elizabeth](https://g
 
 ## Getting started
 
+### Installation
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/melvinkokxw/improving-dl-accuracy-gan
+```
+2. Install required packages
+
+The following packages are required:
+- `torch`
+- `torchvision`
+- `Pillow`
+- `numpy`
+- `pytorchcv`
+- `opencv-python`
+
+### Required files
+
+The following files are required to run the program:
+* Cascade file. The cascade file can be obtained from [here](/haarcascade_frontalface_alt2.xml) or [here](https://github.com/opencv/opencv/tree/master/data/haarcascades)
+
 ## Usage
+
+
 
 ## Credits
 
